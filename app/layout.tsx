@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "../components/ScrollProgress";
+import { ThemeProvider } from "next-themes";
+import { ThemeTogglerButton } from "../components/ThemeToggler";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,14 +26,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ScrollProgress />
-        {/* <ThemeProvider attribute="class" defaultTheme="system"> */}
-        {children}
-        {/* </ThemeProvider> */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          themes={["light", "dark"]}
+        >
+          <ScrollProgress />
+          <ThemeTogglerButton direction="btt" position="br" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

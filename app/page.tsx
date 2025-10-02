@@ -10,6 +10,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { useSectionTitle } from "@/hooks/useSectionTitle";
+import { ThemeTogglerButton } from "@/components/ThemeToggler";
 
 export default function Page() {
   const [introDone, setIntroDone] = useState(false);
@@ -21,6 +22,8 @@ export default function Page() {
     <div className="relative min-h-screen bg-white dark:bg-black">
       {/* 마우스 글로우 효과 */}
       <MouseGlow />
+
+      <ThemeTogglerButton direction="btt" position="br" />
 
       <AnimatePresence>
         {!introDone && (
