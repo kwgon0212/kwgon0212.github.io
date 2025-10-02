@@ -1,6 +1,6 @@
 "use client";
 
-import Contact from "@/components/Contact";
+// import Contact from "@/components/Contact";
 import LogoTransition from "@/components/LogoTransition";
 import MouseGlow from "@/components/MouseGlow";
 import Projects from "@/components/Projects";
