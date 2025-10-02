@@ -20,8 +20,32 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Intersection Observer로 컴포넌트가 화면에 보이는지 확인
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const element = document.querySelector("[data-typing-animation]");
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
 
   useEffect(() => {
+    if (!isVisible) return;
+
     const timeout = setTimeout(
       () => {
         const fullText = texts[currentTextIndex];
@@ -57,6 +81,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
     typingSpeed,
     deletingSpeed,
     pauseTime,
+    isVisible,
   ]);
 
   const renderText = (text: string) => {
@@ -75,7 +100,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({
   };
 
   return (
-    <span className={className}>
+    <span className={className} data-typing-animation>
       <span dangerouslySetInnerHTML={{ __html: renderText(currentText) }} />
       <span className="animate-pulse">|</span>
     </span>

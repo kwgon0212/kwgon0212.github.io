@@ -31,7 +31,7 @@ const Resume = () => {
           <div className="flex-shrink-0">
             <div className="w-48 h-48 relative rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 shadow-lg">
               <Image
-                src="/profile.JPG"
+                src={profile.image}
                 alt="김우곤"
                 className="w-full h-full object-cover"
                 fill

@@ -12,7 +12,7 @@ export const educations = [
     school: "충주고등학교",
     major: "이공계열",
     description: "졸업",
-    image: "/education/high-school.png",
+    image: "/assets/high-school.png",
     // "https://i.namu.wiki/i/qf5IRIfLzXVzEgfmwlcdlxsO0TFNHthKBRqL4TUy7wyEhA4LmoefbEG7nyb24o6XzKufrOfk1n-QkkWiceBtfWTyzOP8fmER5b3GAHCU--ycXYZw-YGnIew1hh2Wi5xFfBeg939zL5c4f0n3ZpSxOw.webp",
   },
 ];

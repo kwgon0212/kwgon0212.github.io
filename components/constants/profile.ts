@@ -5,5 +5,5 @@ export const profile = {
   github: "https://github.com/kwgon0212",
   address: "서울특별시 서대문구 충정로 43-4",
   description: "FE Developer",
-  image: "/profile.jpg",
+  image: "/assets/me.JPG",
 };
