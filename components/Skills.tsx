@@ -35,166 +35,120 @@ const Skills = () => {
                 <h3 className="text-3xl font-bold text-black dark:text-white">
                   {category.category}
                 </h3>
-                <div className="relative group">
-                  <svg
-                    className="w-5 h-5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-help"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-4 py-3 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50 min-w-max">
-                    <div className="space-y-1">
-                      <div className="font-semibold text-xs text-gray-300 dark:text-gray-600 mb-2">
-                        레벨별 설명
-                      </div>
-                      <div>Lv.0: 초보자 - 기본 개념 이해</div>
-                      <div>Lv.1: 입문자 - 간단한 프로젝트 가능</div>
-                      <div>Lv.2: 초급자 - 기본적인 기능 구현</div>
-                      <div>Lv.3: 중급자 - 복잡한 프로젝트 개발</div>
-                      <div>Lv.4: 고급자 - 아키텍처 설계 가능</div>
-                      <div>Lv.5: 전문가 - 멘토링 및 리딩 가능</div>
-                    </div>
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
-                  </div>
-                </div>
               </div>
 
-              {/* 무한 스크롤 컨테이너 */}
-              <div className="relative scroll-container">
-                {/* 왼쪽 페이드 효과 */}
-                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white dark:from-black to-transparent z-10 pointer-events-none"></div>
+              {/* 스킬 그리드 */}
+              <div className="flex flex-wrap gap-8 justify-center">
+                {category.skills.map((skill, skillIndex) => (
+                  <div key={skillIndex} className="relative group">
+                    {/* 오각형 SVG */}
+                    <svg
+                      width="140"
+                      height="140"
+                      viewBox="0 0 140 140"
+                      className="transition-all duration-500 group-hover:scale-0"
+                    >
+                      <defs>
+                        <linearGradient
+                          id={`gradient-${categoryIndex}-${skillIndex}`}
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="100%"
+                        >
+                          <stop
+                            offset="0%"
+                            stopColor="currentColor"
+                            stopOpacity="0.3"
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="currentColor"
+                            stopOpacity="0.8"
+                          />
+                        </linearGradient>
+                      </defs>
+                      {/* 오각형의 각 변을 개별적으로 그리기 */}
+                      {[1, 2, 3, 4, 5].map((side) => {
+                        const isActive = side <= skill.level;
 
-                {/* 오른쪽 페이드 효과 */}
-                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white dark:from-black to-transparent z-10 pointer-events-none"></div>
+                        // 정오각형의 5개 꼭짓점 좌표 (중심: 70,70, 반지름: 60)
+                        const centerX = 70;
+                        const centerY = 70;
+                        const radius = 60;
+                        const points = [];
 
-                {/* 스크롤 컨테이너 */}
-                <div className="overflow-hidden py-3">
-                  <div
-                    className={`flex gap-6 ${
-                      categoryIndex % 2 === 0
-                        ? "animate-infinite-scroll"
-                        : "animate-infinite-scroll-reverse"
-                    }`}
-                    style={{ width: "max-content" }}
-                  >
-                    {/* 첫 번째 세트 */}
-                    {category.skills.map((skill, skillIndex) => (
-                      <div
-                        key={`first-${skillIndex}`}
-                        className="group relative flex-shrink-0 w-72 p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                      >
-                        {/* 스킬 이름과 아이콘 */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="flex items-center gap-2">
-                            {skill.images.map((image) => {
-                              if (image) {
-                                return (
-                                  <Image
-                                    key={image}
-                                    src={image}
-                                    alt={skill.name}
-                                    width={40}
-                                    height={40}
-                                  />
-                                );
-                              }
-                            })}
-                          </div>
-                          <h4 className="text-lg font-semibold text-black dark:text-white">
-                            {skill.name}
-                          </h4>
+                        for (let i = 0; i < 5; i++) {
+                          const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2; // -90도부터 시작
+                          const x = centerX + radius * Math.cos(angle);
+                          const y = centerY + radius * Math.sin(angle);
+                          points.push({ x, y });
+                        }
+
+                        const currentPoint = points[side - 1];
+                        const nextPoint = points[side % 5]; // 마지막 점은 첫 번째 점과 연결
+
+                        return (
+                          <line
+                            key={side}
+                            x1={currentPoint.x}
+                            y1={currentPoint.y}
+                            x2={nextPoint.x}
+                            y2={nextPoint.y}
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            className={`transition-all duration-300 ${
+                              isActive
+                                ? `text-gradient-${skill.level}`
+                                : "text-gray-300 dark:text-gray-600"
+                            }`}
+                          />
+                        );
+                      })}
+                    </svg>
+
+                    {/* 스택 이미지 */}
+                    <div className="absolute inset-0 flex items-center justify-center gap-1">
+                      {skill.images.map((image, index) => {
+                        if (image) {
+                          return (
+                            <Image
+                              key={image}
+                              src={image}
+                              alt={skill.name}
+                              width={skill.images.length > 1 ? 35 : 45}
+                              height={skill.images.length > 1 ? 35 : 45}
+                              className="transition-all duration-500 group-hover:scale-0"
+                            />
+                          );
+                        }
+                      })}
+                    </div>
+
+                    {/* 레벨 설명 텍스트 */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-0 group-hover:scale-100">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-black dark:text-white mb-2">
+                          Lv.{skill.level}
                         </div>
-
-                        {/* 레벨 표시 네모칸 */}
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                              Lv.{skill.level}
-                            </span>
-                          </div>
-                          <div className="flex gap-1">
-                            {[1, 2, 3, 4, 5].map((level) => (
-                              <div
-                                key={level}
-                                className={`flex-1 h-3 rounded-sm transition-all duration-300 ${
-                                  level <= skill.level
-                                    ? `bg-gradient-to-br ${skill.color}`
-                                    : "bg-gray-200 dark:bg-gray-700"
-                                }`}
-                              />
-                            ))}
-                          </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 max-w-20">
+                          {skill.level === 0 && "초보자"}
+                          {skill.level === 1 && "입문자"}
+                          {skill.level === 2 && "초급자"}
+                          {skill.level === 3 && "중급자"}
+                          {skill.level === 4 && "고급자"}
+                          {skill.level === 5 && "전문가"}
                         </div>
-
-                        {/* 호버 시 배경 그라데이션 */}
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`}
-                        ></div>
                       </div>
-                    ))}
+                    </div>
 
-                    {/* 두 번째 세트 (무한 스크롤용 복제) */}
-                    {category.skills.map((skill, skillIndex) => (
-                      <div
-                        key={`second-${skillIndex}`}
-                        className="group relative flex-shrink-0 w-72 p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
-                      >
-                        {/* 스킬 이름과 아이콘 */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="flex items-center gap-2">
-                            {skill.images.map((image) => {
-                              if (image) {
-                                return (
-                                  <Image
-                                    key={image}
-                                    src={image}
-                                    alt={skill.name}
-                                    width={40}
-                                    height={40}
-                                  />
-                                );
-                              }
-                            })}
-                          </div>
-                          <h4 className="text-lg font-semibold text-black dark:text-white">
-                            {skill.name}
-                          </h4>
-                        </div>
-
-                        {/* 레벨 표시 네모칸 */}
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                              Lv.{skill.level}
-                            </span>
-                          </div>
-                          <div className="flex gap-1">
-                            {[1, 2, 3, 4, 5].map((level) => (
-                              <div
-                                key={level}
-                                className={`flex-1 h-3 rounded-sm transition-all duration-300 ${
-                                  level <= skill.level
-                                    ? `bg-gradient-to-br ${skill.color}`
-                                    : "bg-gray-200 dark:bg-gray-700"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* 호버 시 배경 그라데이션 */}
-                        <div
-                          className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300`}
-                        ></div>
-                      </div>
-                    ))}
+                    {/* 호버 시 스택명 */}
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                      {skill.name}
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900 dark:border-b-gray-100"></div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           ))}
