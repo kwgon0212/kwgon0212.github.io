@@ -18,14 +18,24 @@ export const skillCategories: SkillCategory[] = [
     icon: "🎨",
     skills: [
       {
-        name: "HTML/CSS",
+        name: "HTML",
         level: 5,
-        stacks: ["HTML", "CSS"],
+        stacks: ["HTML"],
       },
       {
-        name: "JS/TS",
+        name: "CSS",
+        level: 5,
+        stacks: ["CSS"],
+      },
+      {
+        name: "JavaScript",
         level: 4,
-        stacks: ["JavaScript", "TypeScript"],
+        stacks: ["JavaScript"],
+      },
+      {
+        name: "TypeScript",
+        level: 4,
+        stacks: ["TypeScript"],
       },
       {
         name: "React.js",
