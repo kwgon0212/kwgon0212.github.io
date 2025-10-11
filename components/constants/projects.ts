@@ -1,3 +1,5 @@
+import { skills, Skill } from "./stack";
+
 export interface Project {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ export interface Project {
   description: string;
   period: string;
   award?: string;
-  techStack: string[];
+  techStack: Skill[];
   details: string[];
   githubUrl?: string;
   demoUrl?: string;
@@ -15,20 +17,20 @@ export const projects: Project[] = [
   {
     id: 1,
     name: "Fling",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+    logo: "/assets/projects/fling.svg",
     description: "대학생을 위한 랜덤 데이팅 웹앱",
     period: "2024.03.01 - 2024.12.24",
     techStack: [
-      "JavaScript",
-      "Next.js",
-      "Express.js",
-      "tailwindcss",
-      "Styled-components",
-      "PWA",
-      "Redux-toolkit",
-      "MongoDB",
-      "Firebase",
-      "Framer-motion",
+      skills["JavaScript"],
+      skills["Next.js"],
+      skills["express.js"],
+      skills["tailwindcss"],
+      skills["styled-components"],
+      skills["PWA"],
+      skills["Redux-toolkit"],
+      skills["mongoDB"],
+      skills["firebase"],
+      skills["Framer-motion"],
     ],
     details: [
       "풀스택 개발 전체 주도",
@@ -39,26 +41,27 @@ export const projects: Project[] = [
       "cloudtype을 이용한 서비스 배포 자동화 구축",
     ],
     githubUrl: "https://github.com/kwgon0212/fling",
-    demoUrl: "https://portfolio-demo.vercel.app",
+    // demoUrl: "https://portfolio-demo.vercel.app",
   },
   {
     id: 2,
     name: "PayRunner",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+    logo: "/assets/projects/payrunner.png",
     description: "근로관리 올인원 플랫폼",
     period: "2025.02.18 - 2025.03.18",
     award:
       "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 중간 프로젝트 시상 - 우수상",
     techStack: [
-      "TypeScript",
-      "React.js",
-      "tailwindcss",
-      "Styled-components",
-      "Redux-toolkit",
-      "Express.js",
-      "Firebase",
-      "MongoDB",
-      "Framer-motion",
+      skills["TypeScript"],
+      skills["React.js"],
+      skills["React Router"],
+      skills["tailwindcss"],
+      skills["styled-components"],
+      skills["Redux-toolkit"],
+      skills["express.js"],
+      skills["firebase"],
+      skills["mongoDB"],
+      skills["Framer-motion"],
     ],
     details: [
       "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
@@ -70,19 +73,19 @@ export const projects: Project[] = [
   {
     id: 3,
     name: "NewsToss",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg",
+    logo: "/assets/projects/news-toss.png",
     description: "주식투자를 위한 스마트 뉴스 플랫폼",
     period: "2025.04.30 - 2025.07.01",
     award:
       "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 통합 프로젝트 시상- 우수상",
     techStack: [
-      "TypeScript",
-      "Next.js",
-      "tailwindcss",
-      "Zustand",
-      "Tanstack-query",
-      "Sentry",
-      "Vercel",
+      skills["TypeScript"],
+      skills["Next.js"],
+      skills["tailwindcss"],
+      skills["Zustand"],
+      skills["Tanstack-query"],
+      skills["Sentry"],
+      skills["Vercel"],
     ],
     details: [
       "Figma를 이용한 UX/UI 디자인 및 프론트엔드 개발 전체 주도",

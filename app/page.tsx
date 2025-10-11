@@ -1,8 +1,8 @@
 "use client";
 
 // import Contact from "@/components/Contact";
-import LogoTransition from "@/components/LogoTransition";
-import MouseGlow from "@/components/MouseGlow";
+import LogoTransition from "@/components/shared/LogoTransition";
+import MouseGlow from "@/components/shared/MouseGlow";
 import Projects from "@/components/Projects";
 import Resume from "@/components/Resume";
 import Skills from "@/components/Skills";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { useSectionTitle } from "@/hooks/useSectionTitle";
-import { ThemeTogglerButton } from "@/components/ThemeToggler";
+import { ThemeTogglerButton } from "@/components/shared/ThemeToggler";
 
 export default function Page() {
   const [introDone, setIntroDone] = useState(false);
@@ -47,7 +47,6 @@ export default function Page() {
         <Resume />
         <Projects />
         <Skills />
-        {/* <Contact /> */}
       </div>
     </div>
   );

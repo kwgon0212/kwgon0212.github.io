@@ -4,9 +4,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { projects } from "./constants/projects";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import Modal from "./shared/Modal";
+import Fling from "./Projects/Fling";
+import PayRunner from "./Projects/PayRunner";
+import NewsToss from "./Projects/NewsToss";
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const { ref, isVisible } = useScrollAnimation(400);
 
   return (
@@ -31,15 +36,15 @@ const Projects = () => {
         {/* 프로젝트 탭 */}
         <div className="max-w-4xl mx-auto">
           {/* 탭 헤더 */}
-          <div className="flex flex-wrap gap-1 mb-8 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex flex-wrap gap-1 mb-8 border-b border-gray-200 dark:border-gray-700/50">
             {projects.map((project, index) => (
               <button
                 key={project.id}
                 onClick={() => setActiveTab(index)}
-                className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-200 cursor-pointer ${
+                className={`px-6 py-2.5 text-sm font-semibold rounded-t-lg transition-all duration-200 cursor-pointer ${
                   activeTab === index
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                    ? "bg-blue-500 dark:bg-blue-600 text-white shadow-md"
+                    : "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/70 border border-gray-200 dark:border-gray-700"
                 }`}
               >
                 {project.name}
@@ -48,7 +53,7 @@ const Projects = () => {
           </div>
 
           {/* 탭 콘텐츠 슬라이더 */}
-          <div className="relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="relative bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-lg dark:shadow-xl">
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${activeTab * 100}%)` }}
@@ -58,28 +63,28 @@ const Projects = () => {
                   <div className="p-8">
                     <div className="flex flex-col lg:flex-row gap-8">
                       {/* 프로젝트 이미지/로고 */}
-                      <div className="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center flex-shrink-0 rounded-lg">
-                        <Image
-                          src={project.logo}
-                          alt={project.name}
-                          width={120}
-                          height={120}
-                          className="object-contain"
-                        />
-                      </div>
 
                       {/* 프로젝트 정보 */}
                       <div className="flex-1">
                         {/* 프로젝트명과 기간 */}
                         <div className="mb-6">
-                          <h3 className="text-3xl font-bold text-black dark:text-white mb-2">
-                            {project.name}
-                          </h3>
+                          <div className="flex items-center gap-2 mb-2">
+                            <Image
+                              src={project.logo}
+                              alt={project.name}
+                              width={40}
+                              height={40}
+                              className="object-contain rounded-md"
+                            />
+                            <h3 className="text-3xl font-bold text-black dark:text-white">
+                              {project.name}
+                            </h3>
+                          </div>
                           <p className="text-lg text-gray-500 dark:text-gray-400 mb-4">
                             {project.period}
                           </p>
                           {project.award && (
-                            <div className="inline-flex items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 text-sm font-medium rounded-full break-keep">
+                            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/40 dark:to-amber-900/40 text-yellow-800 dark:text-yellow-200 text-sm font-medium rounded-lg border border-yellow-300 dark:border-yellow-700/50 break-keep shadow-sm">
                               🏆 {project.award}
                             </div>
                           )}
@@ -101,14 +106,27 @@ const Projects = () => {
                             사용 기술
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {project.techStack.map((tech, techIndex) => (
-                              <span
-                                key={techIndex}
-                                className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 text-sm rounded-full"
-                              >
-                                {tech}
-                              </span>
-                            ))}
+                            {project.techStack.map(
+                              ({ name: stack, img }, techIndex) => (
+                                <div
+                                  key={techIndex}
+                                  className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-sm rounded-lg border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                                >
+                                  {img && (
+                                    <div className="w-5 h-5 flex items-center justify-center bg-white dark:bg-white/90 rounded p-0.5">
+                                      <Image
+                                        src={img}
+                                        alt={stack}
+                                        width={20}
+                                        height={20}
+                                        className="object-contain"
+                                      />
+                                    </div>
+                                  )}
+                                  <span className="font-medium">{stack}</span>
+                                </div>
+                              )
+                            )}
                           </div>
                         </div>
 
@@ -121,10 +139,12 @@ const Projects = () => {
                             {project.details.map((detail, detailIndex) => (
                               <li
                                 key={detailIndex}
-                                className="flex items-start gap-2"
+                                className="flex items-start gap-3 group"
                               >
-                                <span className="text-blue-500 mt-1">•</span>
-                                <span className="text-gray-600 dark:text-gray-400">
+                                <span className="text-blue-500 dark:text-blue-400 mt-1 group-hover:scale-125 transition-transform">
+                                  •
+                                </span>
+                                <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                   {detail}
                                 </span>
                               </li>
@@ -133,13 +153,13 @@ const Projects = () => {
                         </div>
 
                         {/* 링크 버튼들 */}
-                        <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-3">
                           {project.githubUrl && (
                             <a
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                              className="flex items-center gap-2 px-5 py-2.5 bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/70 transition-all border border-gray-200 dark:border-gray-700 font-medium shadow-sm hover:shadow-md"
                             >
                               <svg
                                 className="w-4 h-4"
@@ -160,7 +180,7 @@ const Projects = () => {
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                              className="flex items-center gap-2 px-5 py-2.5 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white rounded-lg transition-all font-medium shadow-sm hover:shadow-md"
                             >
                               <svg
                                 className="w-4 h-4"
@@ -178,6 +198,12 @@ const Projects = () => {
                               데모 보기
                             </a>
                           )}
+                          <button
+                            onClick={() => setSelectedProject(activeTab)}
+                            className="px-5 py-2.5 bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700 text-white rounded-lg transition-all font-medium shadow-sm hover:shadow-md"
+                          >
+                            📋 상세보기
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -187,6 +213,18 @@ const Projects = () => {
             </div>
           </div>
         </div>
+
+        {/* 프로젝트 모달 */}
+        {selectedProject !== null && (
+          <Modal
+            isOpen={selectedProject !== null}
+            onClose={() => setSelectedProject(null)}
+          >
+            {selectedProject === 0 && <Fling />}
+            {selectedProject === 1 && <PayRunner />}
+            {selectedProject === 2 && <NewsToss />}
+          </Modal>
+        )}
       </div>
     </section>
   );

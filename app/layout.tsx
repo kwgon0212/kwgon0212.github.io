@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ScrollProgress from "../components/ScrollProgress";
+import ScrollProgress from "../components/shared/ScrollProgress";
 import { ThemeProvider } from "next-themes";
-import { ThemeTogglerButton } from "../components/ThemeToggler";
+import { ThemeTogglerButton } from "../components/shared/ThemeToggler";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

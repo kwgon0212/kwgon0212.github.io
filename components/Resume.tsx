@@ -2,21 +2,17 @@
 
 import Image from "next/image";
 import React from "react";
-import { educations } from "./constants/educations";
-import { profile } from "./constants/profile";
-import { actives } from "./constants/actives";
-import { certificates } from "./constants/certificates";
+import { educations } from "./constants/resume/educations";
+import { profile } from "./constants/resume/profile";
+import { actives } from "./constants/resume/actives";
+import { certificates } from "./constants/resume/certificates";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
-import TypingAnimation from "./TypingAnimation";
+import TypingAnimation from "./shared/TypingAnimation";
+import { mottos } from "./constants/resume/mottos";
 
 const Resume = () => {
   const { ref, isVisible } = useScrollAnimation(600);
 
-  const mottos = [
-    "UX에 대해 꾸준히 고민하는 개발자",
-    "웹서비스 아이디어를 함께 이야기하고 고민하는 걸 좋아하는 개발자",
-    "활발한 소통을 통해 더 나은 서비스를 만들어가는 것을 중요시하는 개발자",
-  ];
   return (
     <section
       ref={ref}
