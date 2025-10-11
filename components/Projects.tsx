@@ -8,6 +8,7 @@ import Modal from "./shared/Modal";
 import Fling from "./Projects/Fling";
 import PayRunner from "./Projects/PayRunner";
 import NewsToss from "./Projects/NewsToss";
+import { cn } from "@/lib/utils";
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -18,9 +19,10 @@ const Projects = () => {
     <section
       ref={ref}
       data-title="Projects"
-      className={`min-h-screen py-20 px-6 md:px-12 lg:px-20 transition-all duration-1000 ease-out ${
+      className={cn(
+        "min-h-screen py-20 px-6 md:px-12 lg:px-20 transition-all duration-1000 ease-out",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      )}
     >
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
@@ -41,11 +43,12 @@ const Projects = () => {
               <button
                 key={project.id}
                 onClick={() => setActiveTab(index)}
-                className={`px-6 py-2.5 text-sm font-semibold rounded-t-lg transition-all duration-200 cursor-pointer ${
+                className={cn(
+                  "px-6 py-2.5 text-sm font-semibold rounded-t-lg transition-all duration-200 cursor-pointer",
                   activeTab === index
                     ? "bg-blue-500 dark:bg-blue-600 text-white shadow-md"
                     : "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/70 border border-gray-200 dark:border-gray-700"
-                }`}
+                )}
               >
                 {project.name}
               </button>

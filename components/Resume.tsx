@@ -9,6 +9,7 @@ import { certificates } from "./constants/resume/certificates";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import TypingAnimation from "./shared/TypingAnimation";
 import { mottos } from "./constants/resume/mottos";
+import { cn } from "@/lib/utils";
 
 const Resume = () => {
   const { ref, isVisible } = useScrollAnimation(600);
@@ -17,9 +18,10 @@ const Resume = () => {
     <section
       ref={ref}
       data-title="김우곤's Portfolio"
-      className={`min-h-screen py-20 px-6 md:px-12 lg:px-20 transition-all duration-1000 ease-out ${
+      className={cn(
+        "min-h-screen py-20 px-6 md:px-12 lg:px-20 transition-all duration-1000 ease-out",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      )}
     >
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 items-start">

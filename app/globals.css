@@ -45,39 +45,6 @@ body {
   display: none;
 }
 
-/* 무한 스크롤 애니메이션 */
-@keyframes infinite-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes infinite-scroll-reverse {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.animate-infinite-scroll {
-  animation: infinite-scroll 20s linear infinite;
-}
-
-.animate-infinite-scroll-reverse {
-  animation: infinite-scroll-reverse 20s linear infinite;
-}
-
-/* 호버 시 애니메이션 정지 */
-.scroll-container:hover .animate-infinite-scroll,
-.scroll-container:hover .animate-infinite-scroll-reverse {
-  animation-play-state: paused;
-}
-
 /* 스킬 레벨별 색상 */
 .text-gradient-1 {
   color: #ef4444; /* red-500 */

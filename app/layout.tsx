@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollProgress from "../components/shared/ScrollProgress";
 import { ThemeProvider } from "next-themes";
 import { ThemeTogglerButton } from "../components/shared/ThemeToggler";
+import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(geistSans.variable, geistMono.variable, "antialiased")}
       >
         <ThemeProvider
           attribute="class"

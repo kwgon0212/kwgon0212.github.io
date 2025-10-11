@@ -1,23 +1,18 @@
-// 레벨별 색상 매핑
-const getLevelColor = (level: number): string => {
-  const colorMap: { [key: number]: string } = {
-    // 0: "from-gray-500 to-gray-600",
-    // 1: "from-pink-500 to-pink-600",
-    // 2: "from-yellow-500 to-yellow-600",
-    // 3: "from-purple-500 to-purple-600",
-    // 4: "from-blue-500 to-blue-600",
-    // 5: "from-green-500 to-green-600",
-    0: "from-blue-400 to-purple-400",
-    1: "from-blue-400 to-purple-400",
-    2: "from-blue-400 to-purple-400",
-    3: "from-blue-400 to-purple-400",
-    4: "from-blue-400 to-purple-400",
-    5: "from-blue-400 to-purple-400",
-  };
-  return colorMap[level] || "from-gray-500 to-gray-600";
-};
+import { skills } from "./stack";
 
-export const skillCategories = [
+export interface SkillItem {
+  name: string;
+  level: number;
+  stacks: string[];
+}
+
+export interface SkillCategory {
+  category: string;
+  icon: string;
+  skills: SkillItem[];
+}
+
+export const skillCategories: SkillCategory[] = [
   {
     category: "Frontend",
     icon: "🎨",
@@ -25,76 +20,47 @@ export const skillCategories = [
       {
         name: "HTML/CSS",
         level: 5,
-        color: getLevelColor(5),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-        ],
+        stacks: ["HTML", "CSS"],
       },
       {
         name: "JS/TS",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-        ],
+        stacks: ["JavaScript", "TypeScript"],
       },
       {
-        name: "React",
+        name: "React.js",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-        ],
+        stacks: ["React.js"],
       },
       {
         name: "Next.js",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-        ],
+        stacks: ["Next.js"],
       },
       {
-        name: "Tailwind CSS",
+        name: "tailwindcss",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-        ],
+        stacks: ["tailwindcss"],
       },
       {
-        name: "Styled-Components",
+        name: "styled-components",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/styledcomponents/styledcomponents-original.svg",
-        ],
+        stacks: ["styled-components"],
       },
       {
         name: "Redux-Toolkit",
         level: 5,
-        color: getLevelColor(5),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg",
-        ],
+        stacks: ["Redux-toolkit"],
       },
       {
         name: "Zustand",
         level: 5,
-        color: getLevelColor(5),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/zustand/zustand-original.svg",
-        ],
+        stacks: ["Zustand"],
       },
       {
         name: "Tanstack Query",
         level: 5,
-        color: getLevelColor(5),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg",
-        ],
+        stacks: ["Tanstack-query"],
       },
     ],
   },
@@ -105,42 +71,27 @@ export const skillCategories = [
       {
         name: "Node.js",
         level: 3,
-        color: getLevelColor(3),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg",
-        ],
+        stacks: ["Node.js"],
       },
       {
         name: "express.js",
         level: 3,
-        color: getLevelColor(3),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg",
-        ],
+        stacks: ["express.js"],
       },
       {
-        name: "MongoDB",
+        name: "mongoDB",
         level: 3,
-        color: getLevelColor(3),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg",
-        ],
+        stacks: ["mongoDB"],
       },
       {
-        name: "Firebase",
+        name: "firebase",
         level: 3,
-        color: getLevelColor(3),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-        ],
+        stacks: ["firebase"],
       },
       {
         name: "PostgreSQL",
         level: 2,
-        color: getLevelColor(2),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-        ],
+        stacks: ["PostgreSQL"],
       },
     ],
   },
@@ -151,35 +102,28 @@ export const skillCategories = [
       {
         name: "Docker",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
-        ],
+        stacks: ["Docker"],
       },
       {
         name: "GitHub Actions",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
-        ],
+        stacks: ["GitHub Actions"],
       },
       {
         name: "AWS EC2 / S3",
         level: 3,
-        color: getLevelColor(3),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-        ],
+        stacks: ["AWS"],
       },
       {
         name: "Figma",
         level: 4,
-        color: getLevelColor(4),
-        images: [
-          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
-        ],
+        stacks: ["Figma"],
       },
     ],
   },
 ];
+
+// 헬퍼 함수: stacks 배열을 이용해 skills 객체에서 이미지 가져오기
+export const getSkillImages = (stacks: string[]) => {
+  return stacks.map((stack) => skills[stack]?.img).filter(Boolean);
+};

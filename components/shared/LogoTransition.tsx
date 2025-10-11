@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function LogoTransition({
   introDone,
@@ -31,7 +32,7 @@ export default function LogoTransition({
       }}
       transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
       onAnimationComplete={() => onFinish()}
-      className={`text-3xl font-bold fixed top-5 left-5 z-[100] ${className}`}
+      className={cn("text-3xl font-bold fixed top-5 left-5 z-[100]", className)}
     >
       <AnimatePresence mode="wait">
         <motion.span
