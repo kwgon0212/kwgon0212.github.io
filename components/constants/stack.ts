@@ -24,6 +24,10 @@ export const skills: Record<string, Skill> = {
     name: "React.js",
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
+  "React-Native.js": {
+    name: "React-Native.js",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactnative/reactnative-original-wordmark.svg",
+  },
   "Next.js": {
     name: "Next.js",
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",

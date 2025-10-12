@@ -19,12 +19,12 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       {
         name: "HTML",
-        level: 5,
+        level: 4,
         stacks: ["HTML"],
       },
       {
         name: "CSS",
-        level: 5,
+        level: 3,
         stacks: ["CSS"],
       },
       {
@@ -43,6 +43,11 @@ export const skillCategories: SkillCategory[] = [
         stacks: ["React.js"],
       },
       {
+        name: "React-Native.js",
+        level: 3,
+        stacks: ["React-Native.js"],
+      },
+      {
         name: "Next.js",
         level: 4,
         stacks: ["Next.js"],
@@ -59,17 +64,17 @@ export const skillCategories: SkillCategory[] = [
       },
       {
         name: "Redux-Toolkit",
-        level: 5,
+        level: 3,
         stacks: ["Redux-toolkit"],
       },
       {
         name: "Zustand",
-        level: 5,
+        level: 3,
         stacks: ["Zustand"],
       },
       {
         name: "Tanstack Query",
-        level: 5,
+        level: 3,
         stacks: ["Tanstack-query"],
       },
     ],
@@ -111,22 +116,22 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       {
         name: "Docker",
-        level: 4,
+        level: 3,
         stacks: ["Docker"],
       },
       {
         name: "GitHub Actions",
-        level: 4,
+        level: 3,
         stacks: ["GitHub Actions"],
       },
       {
         name: "AWS EC2 / S3",
-        level: 3,
+        level: 2,
         stacks: ["AWS"],
       },
       {
         name: "Figma",
-        level: 4,
+        level: 3,
         stacks: ["Figma"],
       },
     ],

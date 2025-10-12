@@ -15,11 +15,6 @@ const Skills = () => {
     >
   >({});
 
-  const getLevelText = (level: number) => {
-    const levels = ["초보자", "입문자", "초급자", "중급자", "고급자", "전문가"];
-    return levels[level] || "초보자";
-  };
-
   const getLevelColor = (level: number) => {
     if (level >= 5) return "bg-purple-500 dark:bg-purple-400";
     if (level >= 4) return "bg-blue-500 dark:bg-blue-400";
@@ -222,13 +217,8 @@ const Skills = () => {
                           </div>
 
                           {/* 레벨 */}
-                          <div className="flex justify-between items-center w-full">
-                            <div className="text-sm sm:text-base font-bold text-black dark:text-white">
-                              Lv.{skill.level}
-                            </div>
-                            <div className="text-xs font-medium text-gray-600 dark:text-gray-300">
-                              {getLevelText(skill.level)}
-                            </div>
+                          <div className="w-full text-sm sm:text-base font-bold text-black dark:text-white">
+                            Lv.{skill.level}
                           </div>
 
                           {/* 프로그레스 바 */}
