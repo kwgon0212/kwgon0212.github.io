@@ -1,62 +1,116 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 
-interface ModalProps {
-  children: React.ReactNode;
+type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  children: React.ReactNode;
+  /** 바깥 클릭으로 닫기 허용 여부 (기본 true) */
+  closeOnBackdrop?: boolean;
+};
+
+const backdropVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const sheetVariants = {
+  initial: { opacity: 0, y: 40, scale: 0.98 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring" as const, stiffness: 480, damping: 32 },
+  },
+  exit: {
+    opacity: 0,
+    y: 40,
+    scale: 0.98,
+    transition: { duration: 0.18 },
+  },
+};
+
+/** 스크롤 잠금 훅 */
+function useLockBodyScroll(locked: boolean) {
+  useEffect(() => {
+    if (!locked) return;
+    const { body } = document;
+    const prev = body.style.overflow;
+    body.style.overflow = "hidden";
+    return () => {
+      body.style.overflow = prev;
+    };
+  }, [locked]);
 }
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
+export const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  closeOnBackdrop = true,
+}: ModalProps) => {
+  const portalRef = useRef<HTMLElement | null>(null);
+
+  // 포털 루트 준비 (#modal-root가 없으면 동적 생성)
   useEffect(() => {
-    if (isOpen) {
-      // 모달이 열릴 때 body 스크롤 막기
-      document.body.style.overflow = "hidden";
-    } else {
-      // 모달이 닫힐 때 body 스크롤 복원
-      document.body.style.overflow = "unset";
+    let root = document.getElementById("modal-root") as HTMLElement | null;
+    if (!root) {
+      root = document.createElement("div");
+      root.id = "modal-root";
+      document.body.appendChild(root);
     }
+    portalRef.current = root;
+  }, []);
 
-    // cleanup 함수
-    return () => {
-      document.body.style.overflow = "unset";
+  // ESC 닫기
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
     };
-  }, [isOpen]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, onClose]);
 
-  const modalContent = (
-    <AnimatePresence mode="wait">
+  // 스크롤 잠금
+  useLockBodyScroll(isOpen);
+
+  if (!portalRef.current) return null;
+
+  return createPortal(
+    // 핵심 포인트: Modal 컴포넌트는 항상 마운트.
+    // 내부에서 isOpen && (...) 로 조건부 렌더 → AnimatePresence가 exit 실행 기회 확보.
+    <AnimatePresence initial={false} mode="sync">
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-          onClick={onClose}
+          key="backdrop"
+          className="fixed inset-0 z-[1000] grid place-items-center bg-black/40"
+          variants={backdropVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          onClick={closeOnBackdrop ? onClose : undefined}
         >
           <motion.div
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 300,
-            }}
-            className="bg-white dark:bg-gray-800 dark:text-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative p-8"
+            key="sheet"
+            className="mx-4 w-[min(95vw,900px)] h-[85vh] rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-2xl flex flex-col overflow-hidden"
+            variants={sheetVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
           >
             {children}
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    portalRef.current
   );
-
-  return createPortal(modalContent, document.body);
 };
-
-export default Modal;

@@ -4,10 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { projects } from "./constants/projects";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
-import Modal from "./shared/Modal";
-import Fling from "./Projects/Fling";
-import PayRunner from "./Projects/PayRunner";
-import NewsToss from "./Projects/NewsToss";
+import { Modal } from "./shared/Modal";
+import ProjectContent from "./Projects/ProjectContent";
 import { cn } from "@/lib/utils";
 
 const Projects = () => {
@@ -113,7 +111,7 @@ const Projects = () => {
                               ({ name: stack, img }, techIndex) => (
                                 <div
                                   key={techIndex}
-                                  className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-sm rounded-lg border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                                  className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-sm rounded-lg border border-blue-200 dark:border-blue-800/50 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors cursor-default"
                                 >
                                   {img && (
                                     <div className="w-5 h-5 flex items-center justify-center bg-white dark:bg-white/90 rounded p-0.5">
@@ -217,17 +215,17 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* 프로젝트 모달 */}
-        {selectedProject !== null && (
-          <Modal
-            isOpen={selectedProject !== null}
-            onClose={() => setSelectedProject(null)}
-          >
-            {selectedProject === 0 && <Fling />}
-            {selectedProject === 1 && <PayRunner />}
-            {selectedProject === 2 && <NewsToss />}
-          </Modal>
-        )}
+        <Modal
+          isOpen={selectedProject !== null}
+          onClose={() => setSelectedProject(null)}
+        >
+          {selectedProject !== null && (
+            <ProjectContent
+              project={projects[selectedProject]}
+              onClose={() => setSelectedProject(null)}
+            />
+          )}
+        </Modal>
       </div>
     </section>
   );
