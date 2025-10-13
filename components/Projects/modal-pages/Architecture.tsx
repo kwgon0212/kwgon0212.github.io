@@ -1,27 +1,36 @@
 "use client";
 
-import Image from "next/image";
+import { ImageCarousel } from "@/components/shared/ImageCarousel";
 
-export const Architecture = (props: { image: string; caption?: string }) => {
-  const { image, caption } = props;
+export const Architecture = (props: {
+  images: string[];
+  caption?: string;
+  description?: string;
+}) => {
+  const { images, caption, description } = props;
+
   return (
     <div className="flex flex-col gap-4 h-full">
-      {/* 이미지 */}
-      <div className="relative flex-1 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white">
-        <Image
-          src={image}
-          alt={caption || "아키텍처"}
-          fill
-          className="object-contain p-8"
-        />
-      </div>
+      {/* 이미지 캐러셀 */}
+      <ImageCarousel
+        images={images}
+        alt={caption || "아키텍처"}
+        className="flex-1"
+      />
 
-      {/* 캡션 */}
-      {caption && (
-        <p className="text-sm text-center text-gray-600 dark:text-gray-400">
-          {caption}
-        </p>
-      )}
+      {/* 캡션과 설명 */}
+      <div className="flex flex-col gap-2">
+        {caption && (
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400 font-medium">
+            {caption}
+          </p>
+        )}
+        {description && (
+          <p className="text-sm text-center text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+            {description}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ export const Overview = ({
           src={coverImage}
           alt={`${title} cover`}
           fill
-          className="object-contain p-8"
+          className="object-contain p-2"
           priority
         />
       </div>

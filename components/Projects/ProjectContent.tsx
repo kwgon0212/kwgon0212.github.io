@@ -129,7 +129,7 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
             )}
 
             {currentPage === "features" && project.features && (
-              <Features items={project.features} />
+              <Features {...project.features} />
             )}
 
             {currentPage === "troubleshooting" && project.troubleshooting && (

@@ -21,30 +21,41 @@ export interface Project {
   repo?: Link;
   mainRole?: string;
   timeline?: {
-    image?: string;
+    images?: string[];
     caption?: string;
     description?: string;
   };
   requirements?: {
-    image?: string;
+    images?: string[];
     caption?: string;
     description?: string;
   };
   architecture?: {
-    image: string;
+    images: string[];
     caption?: string;
-  };
-  features?: Array<{
-    image?: string;
-    title: string;
     description?: string;
-  }>;
+  };
+  features?: {
+    image?: string;
+    items: Array<{
+      title: string;
+      description?: string;
+    }>;
+  };
   troubleshooting?: Array<{
     title: string;
-    problem: string;
-    cause?: string;
-    fix: string;
-    impact?: string;
+    problem: {
+      images?: string[];
+      description: string;
+    };
+    solution: {
+      images?: string[];
+      description: string;
+    };
+    result: {
+      images?: string[];
+      description: string;
+    };
   }>;
 }
 
@@ -88,47 +99,50 @@ export const projects: Project[] = [
     mainRole:
       "Figma UX / UI 디자인 전담\nFullstack 개발 전담 (기획·디자인·개발·배포 전 과정 수행)",
     architecture: {
-      image: "/assets/projects/fling-architecture.png",
+      images: ["/assets/projects/fling-architecture.png"],
     },
     requirements: {
-      image: "/assets/projects/fling-requirements.png",
+      images: ["/assets/projects/fling-requirements.png"],
       caption: "소프트웨어 요구사항 명세서",
       description:
         "요구사항 ID > 요구사항명 > 기능ID > 기능명 > 요구사항 상세설명 > 필요 데이터\n위와 같은 구조로 개발을 진행하여, 누락 없이 요구사항을 충족하면서 기능별로 관리 및 개발 수행\n 위 구조를 통해 상위 요구사항을 세분화된 기능 단위로 분해하고, 각 기능에 필요한 데이터를 명확히 규정해 개발 범위를 점진적으로 축소",
     },
-    features: [
-      {
-        title: "next-pwa로 모바일 UX 최적화",
-        description:
-          "OS마다 PWA 설치 방식이 달라, Android/iOS 구분 후 설치 유도로 유입률 개선",
-      },
-      {
-        title: "Firebase 실시간 트리거를 이용한 채팅기능 + FCM 푸시 알림 적용",
-        description:
-          "service-worker를 이용해 모바일 백그라운드 환경에서도 알림 수신가능",
-      },
-      {
-        title: "Puppeteer로 맛집 크롤링 자동화 및 KakaoMap API로 위치 표시",
-        description: "대전광역시로 국한하여 데이트 맛집 크롤링",
-      },
-      {
-        title: "node-scheduler로 매주 월요일마다 유저 랜덤 매칭 자동화",
-      },
-      {
-        title: "회원가입 시 질문을 통해 연애 성향 설정",
-      },
-      {
-        title:
-          "회원가입 시 대학교 메일로 계정관리 및 관리자 페이지를 통해 대학생 인증 관리",
-        description: "대학생 신뢰도 확보",
-      },
-      {
-        title: "관리자 페이지를 통해 유저의 문의내역, 신고내역 관리",
-      },
-      {
-        title: "OpenAI API로 주간 운세 제공 기능 구현",
-      },
-    ],
+    features: {
+      items: [
+        {
+          title: "next-pwa로 모바일 UX 최적화",
+          description:
+            "OS마다 PWA 설치 방식이 달라, Android/iOS 구분 후 설치 유도로 유입률 개선",
+        },
+        {
+          title:
+            "Firebase 실시간 트리거를 이용한 채팅기능 + FCM 푸시 알림 적용",
+          description:
+            "service-worker를 이용해 모바일 백그라운드 환경에서도 알림 수신가능",
+        },
+        {
+          title: "Puppeteer로 맛집 크롤링 자동화 및 KakaoMap API로 위치 표시",
+          description: "대전광역시로 국한하여 데이트 맛집 크롤링",
+        },
+        {
+          title: "node-scheduler로 매주 월요일마다 유저 랜덤 매칭 자동화",
+        },
+        {
+          title: "회원가입 시 질문을 통해 연애 성향 설정",
+        },
+        {
+          title:
+            "회원가입 시 대학교 메일로 계정관리 및 관리자 페이지를 통해 대학생 인증 관리",
+          description: "대학생 신뢰도 확보",
+        },
+        {
+          title: "관리자 페이지를 통해 유저의 문의내역, 신고내역 관리",
+        },
+        {
+          title: "OpenAI API로 주간 운세 제공 기능 구현",
+        },
+      ],
+    },
   },
   {
     id: 2,
@@ -169,13 +183,15 @@ export const projects: Project[] = [
       href: "https://github.com/kwgon0212/PayRunner",
     },
     mainRole: "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
-    features: [
-      {
-        title: "전자 근로계약서 생성",
-        description:
-          "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성 기능을 개발했습니다.",
-      },
-    ],
+    features: {
+      items: [
+        {
+          title: "전자 근로계약서 생성",
+          description:
+            "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성 기능을 개발했습니다.",
+        },
+      ],
+    },
   },
   {
     id: 3,
@@ -184,7 +200,7 @@ export const projects: Project[] = [
     description: "주식투자를 위한 스마트 뉴스 플랫폼",
     period: "2025.04.30 - 2025.07.01",
     award:
-      "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 통합 프로젝트 시상- 우수상",
+      "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 통합 프로젝트 시상 - 우수상",
     techStack: [
       skills["TypeScript"],
       skills["Next.js"],
@@ -203,33 +219,122 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/kwgon0212/news-toss",
     // 상세 정보
-    coverImage: "/assets/projects/news-toss.png",
+    coverImage: "/assets/projects/news-toss/cover.png",
     overview:
-      "주식투자를 위한 스마트 뉴스 플랫폼입니다. AI 챗봇과 실시간 주가 차트를 제공합니다.",
-    team: [
-      { name: "김우곤", role: "프론트엔드 개발 / UX/UI 디자인" },
-      { name: "백엔드 팀", role: "API 개발" },
-    ],
+      "인공지능이 분석한 핵심 뉴스와 과거 유사 뉴스를 제공하여\n과거 유사 뉴스 당시의 주가 경향을 확인할 수 있고\n각 유저별 맞춤 뉴스 제공으로 더 현명한 투자 결정을 내릴 수 있도록 도와주는 서비스",
+    team: [{ name: "FE 1명 + BE 3명 + MLOps 4명", role: "" }],
     repo: {
       label: "GitHub 저장소",
       href: "https://github.com/kwgon0212/news-toss",
     },
-    mainRole: "Figma를 이용한 UX/UI 디자인 및 프론트엔드 개발 전체 주도",
-    features: [
+    mainRole: "Figma UX / UI 디자인 전담\nFront-end 개발 전담",
+    timeline: {
+      images: ["/assets/projects/news-toss/timeline.png"],
+      description:
+        "간단하게 웹페이지의 와이어프레임 정도의 틀을 먼저 잡아가면서 개발 진행\n후에 백엔드와 소통하면서 API 스펙을 정하고\nAPI가 나올때마다 연동하고 디자인에 수정이 필요한지 재차 검증하면서\n점진적 개발 진행",
+    },
+    architecture: {
+      images: ["/assets/projects/news-toss/architecture.png"],
+      caption: "프로젝트 아키텍처",
+    },
+    features: {
+      image: "/assets/projects/news-toss/features.png",
+      items: [
+        {
+          title:
+            "SSE를 통한 실시간 뉴스 데이터 바인딩 및 챗봇 텍스트 스트림 연동",
+          description:
+            "챗봇 HTML 텍스트를 보안을 위해 DOMPurify를 이용해 출력, XSS 예방",
+        },
+        {
+          title: "Polling 방식의 실시간 국내 주가 데이터 바인딩",
+          description:
+            "개인 호출제한이 있어 20초마다 API를 호출하여 안정적으로 주가 데이터 반영",
+        },
+        {
+          title:
+            "Zustand로 유저의 관심종목 · 포트폴리오 · 스크랩 뉴스 전역 관리",
+        },
+        {
+          title:
+            "각 페이지마다 Animate UI 컴포넌트를 이용하여 마이크로인터렉션 적용(UX↑)",
+          description: "랜딩페이지에 애니메이션(Framer-motion) 적용",
+        },
+        {
+          title:
+            "유저 편의를 위해 localStorage로 최근 본 종목을 10개씩 보여주도록 구현",
+        },
+        {
+          title:
+            "뉴스 및 종목검색 시 불필요한 API 호출을 방지하고자 디바운스 적용",
+        },
+        {
+          title:
+            "기존에 불러온 주가 데이터나 뉴스 데이터를 ISR방식, tanstack-query를 이용해 캐싱하여 리소스 절약 + 렌더링 속도 향상",
+        },
+        {
+          title: "middleware를 통해 헤더의 user-agent로 모바일 / 데스크탑 구분",
+          description: "모바일 접속시 데스크탑 유도 페이지로 리다이렉트",
+        },
+      ],
+    },
+    troubleshooting: [
       {
-        title: "SSE 챗봇 연동",
-        description:
-          "SSE 챗봇 이벤트 스트림 연동 및 polling 방식을 이용한 실시간 주가차트 반영",
+        title: "뉴스 상세 페이지 로딩속도 개선",
+        problem: {
+          images: ["/assets/projects/news-toss/troubleshooting1-1.png"],
+          description:
+            "1. Vercel 기본 리전이 미국(USA)으로 설정되어 있어 한국 사용자에게 응답 지연 발생\n2. API 동기 직렬 처리\n3. 클라이언트 컴포넌트에서 단순 fetch() 사용 → 캐싱 부재\n4. 공통적으로 보게 되는 캘린더 페이지, 뉴스 상세 페이지가 매번 새로 렌더링됨",
+        },
+        solution: {
+          images: [
+            "/assets/projects/news-toss/troubleshooting1-2.png",
+            "/assets/projects/news-toss/troubleshooting1-3.png",
+          ],
+          description:
+            "1. Vercel 리전 설정을 한국(ap-northeast-2) 으로 변경하여 물리적 거리 단축\n2. Promise.allSettled()를 이용해 병렬 처리\n3. ISR 방식 적용 → 데이터가 자주 바뀌지 않는 페이지를 정적으로 캐싱\n4. TanStack Query 도입 → 클라이언트 컴포넌트에서 fetch에 react-query를 적용하여 상태 관리 및 캐싱 처리",
+        },
+        result: {
+          images: ["/assets/projects/news-toss/troubleshooting1-4.png"],
+          description: "페이지 렌더링 시간 약 3000ms → 1250ms로 향상",
+        },
       },
       {
-        title: "성능 최적화",
-        description:
-          "상세뉴스 페이지의 렌더링 속도를 3000ms → 1200ms로 60% 개선하여 사용자 체감 성능을 크게 향상",
+        title:
+          "미들웨어로 페이지 리다이렉트 시 페이지의 css가 적용되지 않는 문제",
+        problem: {
+          images: ["/assets/projects/news-toss/troubleshooting2-1.png"],
+          description:
+            "middleware가 _next/static/ 같은 정적 리소스 경로까지 가로채서 잘못된 동작을 유도해 CSS가 적용되지 않음",
+        },
+        solution: {
+          images: ["/assets/projects/news-toss/troubleshooting2-2.png"],
+          description:
+            "해당 코드를 미들웨어 config의 matcher에 추가하여 정적 파일이나 브라우저가 기본적으로 요청하는 리소스는 middleware가 가로채지 않도록 함",
+        },
+        result: {
+          images: ["/assets/projects/news-toss/troubleshooting2-3.png"],
+          description:
+            "tailwindcss가 정상적으로 로딩되어 페이지 스타일이 깨지지 않고, 원래 의도대로 동작",
+        },
       },
       {
-        title: "실시간 모니터링",
-        description:
-          "Sentry를 이용한 배포 후 유저 환경의 오류를 실시간으로 모니터링하여 Slack으로 에러 알림 전송",
+        title: "모달창 컴포넌트",
+        problem: {
+          images: ["/assets/projects/news-toss/troubleshooting3-1.jpg"],
+          description:
+            "일반적인 DOM 트리에 모달을 렌더링할 경우 부모 레이아웃의 position, overflow, z-index 등에 영향 받아 UI 깨짐 현상 발생",
+        },
+        solution: {
+          images: ["/assets/projects/news-toss/troubleshooting3-2.png"],
+          description:
+            "1. createPortal()을 사용해 document.body에 직접 모달 렌더링\n1-1. 부모 컨텍스트에서 독립적으로 렌더링됨\n1-2. z-index 충돌 및 레이아웃 문제 방지",
+        },
+        result: {
+          images: ["/assets/projects/news-toss/troubleshooting3-3.png"],
+          description:
+            "1. 어떤 위치에서도 안정적으로 모달 노출\n2. 레이아웃과 무관한 독립적인 UI 구현 가능",
+        },
       },
     ],
   },

@@ -97,7 +97,7 @@ export const Modal = ({
         >
           <motion.div
             key="sheet"
-            className="mx-4 w-[min(95vw,900px)] h-[85vh] rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-2xl flex flex-col overflow-hidden"
+            className="mx-4 w-[min(95vw,1200px)] h-[85vh] rounded-2xl bg-white dark:bg-gray-800 p-6 shadow-2xl flex flex-col overflow-hidden"
             variants={sheetVariants}
             initial="initial"
             animate="animate"

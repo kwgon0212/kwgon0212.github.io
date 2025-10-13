@@ -1,15 +1,15 @@
 "use client";
 
-import Image from "next/image";
+import { ImageCarousel } from "@/components/shared/ImageCarousel";
 
 export const Timeline = (props: {
-  image?: string;
+  images?: string[];
   caption?: string;
   description?: string;
 }) => {
-  const { image, caption, description } = props;
+  const { images, caption, description } = props;
 
-  if (!image) {
+  if (!images || images.length === 0) {
     return (
       <div className="flex flex-col gap-3 justify-center h-full">
         {caption && (
@@ -18,7 +18,7 @@ export const Timeline = (props: {
           </p>
         )}
         {description && (
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
             {description}
           </p>
         )}
@@ -27,26 +27,23 @@ export const Timeline = (props: {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 h-full">
-      {/* 이미지 영역 */}
-      <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-        <Image
-          src={image}
-          alt={caption || "개발 일정"}
-          fill
-          className="object-contain p-6"
-        />
-      </div>
+    <div className="flex flex-col gap-4 h-full">
+      {/* 이미지 캐러셀 */}
+      <ImageCarousel
+        images={images}
+        alt={caption || "개발 일정"}
+        className="flex-1"
+      />
 
-      {/* 설명 영역 */}
-      <div className="flex flex-col gap-3 justify-center">
+      {/* 캡션과 설명 */}
+      <div className="flex flex-col gap-2">
         {caption && (
-          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+          <p className="text-sm text-center text-gray-600 dark:text-gray-400 font-medium">
             {caption}
           </p>
         )}
         {description && (
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="text-sm text-center text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
             {description}
           </p>
         )}
