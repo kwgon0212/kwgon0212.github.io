@@ -362,24 +362,63 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/kwgon0212/PayRunner",
     // 상세 정보
-    coverImages: ["/assets/projects/payrunner.png"],
-    overview:
-      "근로관리 올인원 플랫폼으로, 근로계약서 작성부터 급여 정산까지 한 번에 관리할 수 있습니다.",
-    team: [
-      { name: "김우곤", role: "팀장 / 풀스택 개발" },
-      { name: "팀원들", role: "프론트엔드 개발" },
+    coverImages: [
+      "/assets/projects/payrunner/cover1.png",
+      "/assets/projects/payrunner/cover2.png",
     ],
+    overview:
+      "근로 공고 등록부터 전자 근로계약서 작성, 출퇴근 관리, 자동 임금 정산까지\n근로자의 권익 보호와 고용주의 업무 편의를 위한 올인원 근로관리 솔루션",
+    team: [{ name: "Full-stack 4명", role: "" }],
     repo: {
       label: "GitHub 저장소",
       href: "https://github.com/kwgon0212/PayRunner",
     },
-    mainRole: "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
+    mainRole:
+      "팀장으로서 기획 및 프로젝트를 리딩\nFigma UX / UI 디자인 80% 담당\n팀원들에게 React와 Express에서 모르는 부분의 지식을 전수하며 프로젝트를 완성",
+    architecture: {
+      images: [
+        "/assets/projects/payrunner/architecture1.png",
+        "/assets/projects/payrunner/architecture2.png",
+      ],
+    },
     features: {
+      images: [
+        "/assets/projects/payrunner/features1.png",
+        "/assets/projects/payrunner/features2.png",
+        "/assets/projects/payrunner/features3.png",
+      ],
       items: [
         {
-          title: "전자 근로계약서 생성",
+          title:
+            "Puppeteer로 유저의 서명이 포함된 전자 근로계약서를 PDF로 생성",
+        },
+        {
+          title: "사용자 유형별 UI 조건 분기 처리",
           description:
-            "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성 기능을 개발했습니다.",
+            "근로자/고용주에 따라 버튼(지원하기 / 채용현황) 등 상황 맞춤 기능 (UX↑)",
+        },
+        {
+          title:
+            "Geolocation API를 이용한 위치 인증을 통해 근로자와 고용주 모두에게 신뢰성 있는 출퇴근 기록 제공",
+        },
+        {
+          title:
+            "출퇴근 기록 기반 자동 임금 산출 및 관리 기능을 제공하여 자동 임금 정산",
+          description: "자동 급여 계산 및 정산 프로세스 간소화",
+        },
+        {
+          title:
+            "NH오픈플랫폼 개발자센터 API를 이용하여 각 유저마다 모의 계좌 생성",
+          description:
+            "고용주가 정산 승인시 자동으로 연결된 근로자의 계좌로 입금",
+        },
+        {
+          title:
+            "Nodemailer를 이용하여 이메일 인증번호 방식의 회원가입 절차 과정 추가",
+        },
+        {
+          title:
+            "Socket.io + Express.js를 이용하여 근로자와 고용주 간 원활한 채팅 지원",
         },
       ],
     },
