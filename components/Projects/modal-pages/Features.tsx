@@ -1,32 +1,29 @@
 "use client";
 
-import Image from "next/image";
+import { ImageCarousel } from "@/components/shared/ImageCarousel";
 
 type FeaturesProps = {
-  image?: string;
+  images?: string[];
   items: Array<{
     title: string;
     description?: string;
   }>;
 };
 
-export const Features = ({ image, items }: FeaturesProps) => {
+export const Features = ({ images, items }: FeaturesProps) => {
   return (
     <div className="grid gap-6 md:grid-cols-2 h-full">
-      {/* 대표 이미지 */}
-      {image && (
-        <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-          <Image
-            src={image}
-            alt="주요 개발 사항"
-            fill
-            className="object-contain p-2"
-          />
-        </div>
+      {/* 대표 이미지 - 캐러셀 */}
+      {images && images.length > 0 && (
+        <ImageCarousel images={images} alt="주요 개발 사항" />
       )}
 
       {/* 기능 목록 */}
-      <div className={image ? "space-y-3" : "col-span-2 space-y-3"}>
+      <div
+        className={
+          images && images.length > 0 ? "space-y-3" : "col-span-2 space-y-3"
+        }
+      >
         {items.map((item, index) => (
           <div key={index} className="space-y-1">
             <div className="flex gap-2">

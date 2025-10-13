@@ -8,6 +8,7 @@ import { Timeline } from "./modal-pages/Timeline";
 import { Requirements } from "./modal-pages/Requirements";
 import { Architecture } from "./modal-pages/Architecture";
 import { Features } from "./modal-pages/Features";
+import { Migration } from "./modal-pages/Migration";
 import { Troubleshooting } from "./modal-pages/Troubleshooting";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -24,6 +25,7 @@ type Page =
   | "requirements"
   | "architecture"
   | "features"
+  | "migration"
   | "troubleshooting";
 
 const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
@@ -40,6 +42,11 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
     },
     { id: "architecture", label: "아키텍처", enabled: !!project.architecture },
     { id: "features", label: "주요 개발", enabled: !!project.features },
+    {
+      id: "migration",
+      label: "마이그레이션 및 전환",
+      enabled: !!project.migration,
+    },
     {
       id: "troubleshooting",
       label: "트러블슈팅",
@@ -107,7 +114,7 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
             {currentPage === "overview" && (
               <Overview
                 title={project.name}
-                coverImage={project.coverImage}
+                coverImages={project.coverImages}
                 overview={project.overview}
                 team={project.team}
                 repo={project.repo}
@@ -130,6 +137,10 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
 
             {currentPage === "features" && project.features && (
               <Features {...project.features} />
+            )}
+
+            {currentPage === "migration" && project.migration && (
+              <Migration items={project.migration} />
             )}
 
             {currentPage === "troubleshooting" && project.troubleshooting && (

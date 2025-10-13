@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { Skill } from "@/components/constants/stack";
+import { ImageCarousel } from "@/components/shared/ImageCarousel";
 
 type Props = {
   title: string;
-  coverImage: string;
+  coverImages: string[];
   overview: string;
   team: { name: string; role: string }[];
   repo?: { label: string; href: string };
@@ -15,7 +16,7 @@ type Props = {
 
 export const Overview = ({
   title,
-  coverImage,
+  coverImages,
   overview,
   team,
   repo,
@@ -24,16 +25,8 @@ export const Overview = ({
 }: Props) => {
   return (
     <div className="grid gap-6 md:grid-cols-2 h-full">
-      {/* 이미지 영역 */}
-      <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
-        <Image
-          src={coverImage}
-          alt={`${title} cover`}
-          fill
-          className="object-contain p-2"
-          priority
-        />
-      </div>
+      {/* 이미지 영역 - 캐러셀 */}
+      <ImageCarousel images={coverImages} alt={`${title} cover`} />
 
       {/* 정보 영역 */}
       <div className="flex flex-col gap-6 overflow-y-auto">

@@ -15,7 +15,7 @@ export interface Project {
   githubUrl?: string;
   demoUrl?: string;
   // 상세 정보
-  coverImage: string;
+  coverImages: string[];
   overview: string;
   team: Member[];
   repo?: Link;
@@ -36,12 +36,16 @@ export interface Project {
     description?: string;
   };
   features?: {
-    image?: string;
+    images?: string[];
     items: Array<{
       title: string;
       description?: string;
     }>;
   };
+  migration?: Array<{
+    title: string;
+    description: string;
+  }>;
   troubleshooting?: Array<{
     title: string;
     problem: {
@@ -62,139 +66,6 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    name: "Fling",
-    logo: "/assets/projects/fling.svg",
-    description: "대학생을 위한 랜덤 데이팅 웹앱",
-    period: "2024.03.01 - 2024.12.24",
-    techStack: [
-      skills["JavaScript"],
-      skills["Next.js"],
-      skills["express.js"],
-      skills["tailwindcss"],
-      skills["styled-components"],
-      skills["PWA"],
-      skills["Redux-toolkit"],
-      skills["mongoDB"],
-      skills["firebase"],
-      skills["Framer-motion"],
-    ],
-    details: [
-      "풀스택 개발 전체 주도",
-      "next-pwa를 이용해 모바일 환경에서의 UX 제공",
-      "node-scheduler를 이용해 매주 월요일마다 새롭게 유저들을 랜덤 매칭해주는 기능 개발",
-      "FCM을 통해 유저간의 채팅 시 모바일 환경에서 알림 서비스 제공",
-      "Puppeteer를 이용한 데이트 맛집 정보 수집",
-      "cloudtype을 이용한 서비스 배포 자동화 구축",
-    ],
-    githubUrl: "https://github.com/kwgon0212/fling",
-    // 상세 정보
-    coverImage: "/assets/projects/fling.svg",
-    overview:
-      "대학교 캡스톤디자인 과제로 코로나 당시의 비대면 및 비혼주의 유행으로 저출산 문제를 해결하고자 만들게 된 데이팅 웹앱",
-    team: [{ name: "Full-stack 1명", role: "" }],
-    repo: {
-      label: "GitHub 저장소",
-      href: "https://github.com/kwgon0212/fling",
-    },
-    mainRole:
-      "Figma UX / UI 디자인 전담\nFullstack 개발 전담 (기획·디자인·개발·배포 전 과정 수행)",
-    architecture: {
-      images: ["/assets/projects/fling-architecture.png"],
-    },
-    requirements: {
-      images: ["/assets/projects/fling-requirements.png"],
-      caption: "소프트웨어 요구사항 명세서",
-      description:
-        "요구사항 ID > 요구사항명 > 기능ID > 기능명 > 요구사항 상세설명 > 필요 데이터\n위와 같은 구조로 개발을 진행하여, 누락 없이 요구사항을 충족하면서 기능별로 관리 및 개발 수행\n 위 구조를 통해 상위 요구사항을 세분화된 기능 단위로 분해하고, 각 기능에 필요한 데이터를 명확히 규정해 개발 범위를 점진적으로 축소",
-    },
-    features: {
-      items: [
-        {
-          title: "next-pwa로 모바일 UX 최적화",
-          description:
-            "OS마다 PWA 설치 방식이 달라, Android/iOS 구분 후 설치 유도로 유입률 개선",
-        },
-        {
-          title:
-            "Firebase 실시간 트리거를 이용한 채팅기능 + FCM 푸시 알림 적용",
-          description:
-            "service-worker를 이용해 모바일 백그라운드 환경에서도 알림 수신가능",
-        },
-        {
-          title: "Puppeteer로 맛집 크롤링 자동화 및 KakaoMap API로 위치 표시",
-          description: "대전광역시로 국한하여 데이트 맛집 크롤링",
-        },
-        {
-          title: "node-scheduler로 매주 월요일마다 유저 랜덤 매칭 자동화",
-        },
-        {
-          title: "회원가입 시 질문을 통해 연애 성향 설정",
-        },
-        {
-          title:
-            "회원가입 시 대학교 메일로 계정관리 및 관리자 페이지를 통해 대학생 인증 관리",
-          description: "대학생 신뢰도 확보",
-        },
-        {
-          title: "관리자 페이지를 통해 유저의 문의내역, 신고내역 관리",
-        },
-        {
-          title: "OpenAI API로 주간 운세 제공 기능 구현",
-        },
-      ],
-    },
-  },
-  {
-    id: 2,
-    name: "PayRunner",
-    logo: "/assets/projects/payrunner.png",
-    description: "근로관리 올인원 플랫폼",
-    period: "2025.02.18 - 2025.03.18",
-    award:
-      "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 중간 프로젝트 시상 - 우수상",
-    techStack: [
-      skills["TypeScript"],
-      skills["React.js"],
-      skills["React Router"],
-      skills["tailwindcss"],
-      skills["styled-components"],
-      skills["Redux-toolkit"],
-      skills["express.js"],
-      skills["firebase"],
-      skills["mongoDB"],
-      skills["Framer-motion"],
-    ],
-    details: [
-      "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
-      "팀원들에게 React와 Express에서 모르는 부분의 지식을 전수하며 프로젝트를 완성",
-      "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성기능 개발",
-    ],
-    githubUrl: "https://github.com/kwgon0212/PayRunner",
-    // 상세 정보
-    coverImage: "/assets/projects/payrunner.png",
-    overview:
-      "근로관리 올인원 플랫폼으로, 근로계약서 작성부터 급여 정산까지 한 번에 관리할 수 있습니다.",
-    team: [
-      { name: "김우곤", role: "팀장 / 풀스택 개발" },
-      { name: "팀원들", role: "프론트엔드 개발" },
-    ],
-    repo: {
-      label: "GitHub 저장소",
-      href: "https://github.com/kwgon0212/PayRunner",
-    },
-    mainRole: "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
-    features: {
-      items: [
-        {
-          title: "전자 근로계약서 생성",
-          description:
-            "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성 기능을 개발했습니다.",
-        },
-      ],
-    },
-  },
-  {
-    id: 3,
     name: "NewsToss",
     logo: "/assets/projects/news-toss.png",
     description: "주식투자를 위한 스마트 뉴스 플랫폼",
@@ -219,7 +90,7 @@ export const projects: Project[] = [
     ],
     githubUrl: "https://github.com/kwgon0212/news-toss",
     // 상세 정보
-    coverImage: "/assets/projects/news-toss/cover.png",
+    coverImages: ["/assets/projects/news-toss/cover.png"],
     overview:
       "인공지능이 분석한 핵심 뉴스와 과거 유사 뉴스를 제공하여\n과거 유사 뉴스 당시의 주가 경향을 확인할 수 있고\n각 유저별 맞춤 뉴스 제공으로 더 현명한 투자 결정을 내릴 수 있도록 도와주는 서비스",
     team: [{ name: "FE 1명 + BE 3명 + MLOps 4명", role: "" }],
@@ -238,7 +109,7 @@ export const projects: Project[] = [
       caption: "프로젝트 아키텍처",
     },
     features: {
-      image: "/assets/projects/news-toss/features.png",
+      images: ["/assets/projects/news-toss/features.png"],
       items: [
         {
           title:
@@ -337,5 +208,180 @@ export const projects: Project[] = [
         },
       },
     ],
+  },
+  {
+    id: 2,
+    name: "Fling",
+    logo: "/assets/projects/fling.svg",
+    description: "대학생을 위한 랜덤 데이팅 웹앱",
+    period: "2024.03.01 - 2024.12.24",
+    techStack: [
+      skills["JavaScript"],
+      skills["Next.js"],
+      skills["express.js"],
+      skills["tailwindcss"],
+      skills["styled-components"],
+      skills["PWA"],
+      skills["Redux-toolkit"],
+      skills["mongoDB"],
+      skills["firebase"],
+      skills["Framer-motion"],
+    ],
+    details: [
+      "풀스택 개발 전체 주도",
+      "next-pwa를 이용해 모바일 환경에서의 UX 제공",
+      "node-scheduler를 이용해 매주 월요일마다 새롭게 유저들을 랜덤 매칭해주는 기능 개발",
+      "FCM을 통해 유저간의 채팅 시 모바일 환경에서 알림 서비스 제공",
+      "Puppeteer를 이용한 데이트 맛집 정보 수집",
+      "cloudtype을 이용한 서비스 배포 자동화 구축",
+    ],
+    githubUrl: "https://github.com/kwgon0212/fling",
+    // 상세 정보
+    coverImages: [
+      "/assets/projects/fling/cover1.png",
+      "/assets/projects/fling/cover2.png",
+    ],
+    overview:
+      "대학교 캡스톤디자인 과제로 코로나 당시의 비대면 및 비혼주의 유행으로 저출산 문제를 해결하고자 만들게 된 데이팅 웹앱",
+    team: [{ name: "Full-stack 1명", role: "" }],
+    repo: {
+      label: "GitHub 저장소",
+      href: "https://github.com/kwgon0212/fling",
+    },
+    mainRole:
+      "Figma UX / UI 디자인 전담\nFullstack 개발 전담 (기획·디자인·개발·배포 전 과정 수행)",
+    requirements: {
+      images: [
+        "/assets/projects/fling/requirements1.png",
+        "/assets/projects/fling/requirements2.png",
+        "/assets/projects/fling/requirements3.png",
+      ],
+      caption: "소프트웨어 요구사항 명세서",
+      description:
+        "요구사항 ID > 요구사항명 > 기능ID > 기능명 > 요구사항 상세설명 > 필요 데이터\n위와 같은 구조로 개발을 진행하여, 누락 없이 요구사항을 충족하면서 기능별로 관리 및 개발 수행\n 위 구조를 통해 상위 요구사항을 세분화된 기능 단위로 분해하고, 각 기능에 필요한 데이터를 명확히 규정해 개발 범위를 점진적으로 축소",
+    },
+    architecture: {
+      images: ["/assets/projects/fling/architecture.png"],
+    },
+    features: {
+      images: [
+        "/assets/projects/fling/features1.png",
+        "/assets/projects/fling/features2.png",
+        "/assets/projects/fling/features3.png",
+        "/assets/projects/fling/features4.png",
+        "/assets/projects/fling/features5.png",
+        "/assets/projects/fling/features6.png",
+      ],
+      items: [
+        {
+          title: "next-pwa로 모바일 UX 최적화",
+          description:
+            "OS마다 PWA 설치 방식이 달라, Android/iOS 구분 후 설치 유도로 유입률 개선",
+        },
+        {
+          title:
+            "Firebase 실시간 트리거를 이용한 채팅기능 + FCM 푸시 알림 적용",
+          description:
+            "service-worker를 이용해 모바일 백그라운드 환경에서도 알림 수신가능",
+        },
+        {
+          title: "Puppeteer로 맛집 크롤링 자동화 및 KakaoMap API로 위치 표시",
+          description: "대전광역시로 국한하여 데이트 맛집 크롤링",
+        },
+        {
+          title: "node-scheduler로 매주 월요일마다 유저 랜덤 매칭 자동화",
+        },
+        {
+          title: "회원가입 시 질문을 통해 연애 성향 설정",
+        },
+        {
+          title:
+            "회원가입 시 대학교 메일로 계정관리 및 관리자 페이지를 통해 대학생 인증 관리",
+          description: "대학생 신뢰도 확보",
+        },
+        {
+          title: "관리자 페이지를 통해 유저의 문의내역, 신고내역 관리",
+        },
+        {
+          title: "OpenAI API로 주간 운세 제공 기능 구현",
+        },
+      ],
+    },
+    migration: [
+      {
+        title: "React.js에서 Next.js로",
+        description:
+          "1. 소개팅앱이라는 점에서 SEO 강화 및 검색 노출 최적화\n2. 기존 React + Express 분리 구조 → Next.js 단일 포트 관리로 개발/운영 용이",
+      },
+      {
+        title: "MongoDB + Socket.io → Firebase로 채팅기능",
+        description:
+          "1. Next.js에서 Socket.io 구현 시 필요한 커스텀 서버 복잡성 제거\n2. 유저 데이터(MongoDB)와 채팅 데이터(Firebase) 분산 저장으로 부하 분산",
+      },
+      {
+        title: "RDB(MySQL) → NoSQL(MongoDB)",
+        description:
+          "1. 채팅 데이터의 삽입/조회가 빠른 MongoDB로 변경\n2. 비정형 데이터 처리에 적합하여 유지보수 효율 상승",
+      },
+      {
+        title: "AWS EC2 배포 → PaaS cloudtype으로 배포",
+        description:
+          "1. EC2의 인프라 / 리소스 관리 부담 감소\n2. Github 기반 자동 빌드·배포 파이프라인 확보",
+      },
+      {
+        title: "결제 기반 매칭 → 무료 랜덤 매칭으로 비즈니스 모델 변경",
+        description:
+          "1. 사업증 등록 및 PG사 결제기능 API 연동의 불편함 해소\n2. node-scheduler 활용하여 매주마다 랜덤으로 유저 매칭 자동화\n3. 대학생 타깃 서비스 특성을 반영해 접근성↑",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "PayRunner",
+    logo: "/assets/projects/payrunner.png",
+    description: "근로관리 올인원 플랫폼",
+    period: "2025.02.18 - 2025.03.18",
+    award:
+      "K-디지털 트레이닝 Tech 우수인재를 위한 풀스택 과정 토스뱅크 2기 중간 프로젝트 시상 - 우수상",
+    techStack: [
+      skills["TypeScript"],
+      skills["React.js"],
+      skills["React Router"],
+      skills["tailwindcss"],
+      skills["styled-components"],
+      skills["Redux-toolkit"],
+      skills["express.js"],
+      skills["firebase"],
+      skills["mongoDB"],
+      skills["Framer-motion"],
+    ],
+    details: [
+      "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
+      "팀원들에게 React와 Express에서 모르는 부분의 지식을 전수하며 프로젝트를 완성",
+      "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성기능 개발",
+    ],
+    githubUrl: "https://github.com/kwgon0212/PayRunner",
+    // 상세 정보
+    coverImages: ["/assets/projects/payrunner.png"],
+    overview:
+      "근로관리 올인원 플랫폼으로, 근로계약서 작성부터 급여 정산까지 한 번에 관리할 수 있습니다.",
+    team: [
+      { name: "김우곤", role: "팀장 / 풀스택 개발" },
+      { name: "팀원들", role: "프론트엔드 개발" },
+    ],
+    repo: {
+      label: "GitHub 저장소",
+      href: "https://github.com/kwgon0212/PayRunner",
+    },
+    mainRole: "팀장으로서 프로젝트를 리딩하며, FE - BE 전반을 주도적으로 개발",
+    features: {
+      items: [
+        {
+          title: "전자 근로계약서 생성",
+          description:
+            "Puppeteer를 이용한 유저의 서명이 포함된 전자 근로계약서 PDF 생성 기능을 개발했습니다.",
+        },
+      ],
+    },
   },
 ];
