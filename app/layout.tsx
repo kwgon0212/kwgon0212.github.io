@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kwgon0212.github.io"),
   title: "김우곤 | FE Developer",
   description: "웹 서비스에 관심이 많은 프론트엔드 개발자 김우곤입니다.",
   keywords: [
