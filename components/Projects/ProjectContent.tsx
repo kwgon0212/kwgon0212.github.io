@@ -9,6 +9,7 @@ import { Requirements } from "./modal-pages/Requirements";
 import { Architecture } from "./modal-pages/Architecture";
 import { Features } from "./modal-pages/Features";
 import { Migration } from "./modal-pages/Migration";
+import { Presentation } from "./modal-pages/Presentation";
 import { Troubleshooting } from "./modal-pages/Troubleshooting";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -26,7 +27,8 @@ type Page =
   | "architecture"
   | "features"
   | "migration"
-  | "troubleshooting";
+  | "troubleshooting"
+  | "presentation";
 
 const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -51,6 +53,11 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
       id: "troubleshooting",
       label: "트러블슈팅",
       enabled: !!project.troubleshooting,
+    },
+    {
+      id: "presentation",
+      label: "프레젠테이션",
+      enabled: !!project.presentation,
     },
   ];
 
@@ -141,6 +148,10 @@ const ProjectContent = ({ project, onClose }: ProjectContentProps) => {
 
             {currentPage === "migration" && project.migration && (
               <Migration items={project.migration} />
+            )}
+
+            {currentPage === "presentation" && project.presentation && (
+              <Presentation {...project.presentation} />
             )}
 
             {currentPage === "troubleshooting" && project.troubleshooting && (

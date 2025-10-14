@@ -61,6 +61,10 @@ export interface Project {
       description: string;
     };
   }>;
+  presentation?: {
+    url: string;
+    title?: string;
+  };
 }
 
 export const projects: Project[] = [
@@ -208,6 +212,10 @@ export const projects: Project[] = [
         },
       },
     ],
+    presentation: {
+      url: "/assets/projects/news-toss/presentation.pdf",
+      title: "프로젝트 발표 자료",
+    },
   },
   {
     id: 2,
