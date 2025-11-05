@@ -444,7 +444,12 @@ export const projects: Project[] = [
       skills["Zustand"],
       skills["dnd-kit"],
     ],
-    details: [],
+    details: [
+      "드래그 앤 드롭으로 탭을 워크스페이스, 그룹, 브라우저 윈도우 간 자유롭게 이동할 수 있는 기능 개발",
+      "스냅샷 기능을 통해 현재 브라우저의 모든 탭 상태를 워크스페이스로 저장하여 나중에 복원할 수 있는 기능 개발",
+      "영구 저장을 통해 모든 데이터는 로컬에 저장되어 브라우저를 닫아도 유지되며, 외부 서버로 전송되지 않는 기능 개발",
+      "데이터 백업 및 복원을 통해 워크스페이스 데이터를 JSON 파일로 내보내고 가져올 수 있는 기능 개발",
+    ],
     githubUrl: "https://github.com/kwgon0212/Snab",
     // 상세 정보
     coverImages: ["/assets/projects/snab/cover1.png"],
