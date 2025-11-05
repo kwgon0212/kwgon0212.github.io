@@ -431,4 +431,72 @@ export const projects: Project[] = [
       ],
     },
   },
+  {
+    id: 4,
+    name: "Snab",
+    logo: "/assets/projects/snab/logo.png",
+    description: "브라우저 탭 관리 크롬 익스텐션 (배포 검수 중)",
+    period: "2025.10.20 - 2025.11.05",
+    techStack: [
+      skills["React.js"],
+      skills["CRXJS"],
+      skills["tailwindcss"],
+      skills["Zustand"],
+      skills["dnd-kit"],
+    ],
+    details: [],
+    githubUrl: "https://github.com/kwgon0212/Snab",
+    // 상세 정보
+    coverImages: ["/assets/projects/snab/cover1.png"],
+    overview: "내가 쓰기 위해 만든 브라우저 탭 관리 크롬 익스텐션",
+    team: [{ name: "개인 프로젝트", role: "" }],
+    mainRole: "전체 개발 및 배포",
+    repo: {
+      label: "GitHub 저장소",
+      href: "https://github.com/kwgon0212/Snab",
+    },
+    architecture: {
+      images: ["/assets/projects/snab/cover2.png"],
+    },
+    features: {
+      images: [],
+      items: [
+        {
+          title: "브라우저 탭 관리",
+          description:
+            "현재 열려있는 모든 브라우저 탭을 확인하고 관리할 수 있습니다.",
+        },
+        {
+          title: "워크스페이스 관리",
+          description:
+            "프로젝트별로 워크스페이스를 생성하여 탭을 체계적으로 분류하고 관리할 수 있습니다.",
+        },
+        {
+          title: "탭 그룹화",
+          description:
+            "워크스페이스 내에서 탭을 그룹으로 분류하여 관리하고, 그룹의 모든 탭을 새 윈도우로 복원할 수 있습니다.",
+        },
+        {
+          title: "드래그 앤 드롭",
+          description:
+            "직관적인 드래그 앤 드롭으로 탭을 워크스페이스, 그룹, 브라우저 윈도우 간 자유롭게 이동할 수 있습니다.",
+        },
+        {
+          title: "스냅샷 기능",
+          description:
+            "현재 브라우저의 모든 탭 상태를 워크스페이스로 저장하여 나중에 복원할 수 있습니다.",
+        },
+        {
+          title: "영구 저장",
+          description:
+            "모든 데이터는 로컬에 저장되어 브라우저를 닫아도 유지되며, 외부 서버로 전송되지 않습니다.",
+        },
+        {
+          title: "데이터 백업 및 복원",
+          description:
+            "워크스페이스 데이터를 JSON 파일로 내보내고 가져올 수 있습니다.",
+        },
+      ],
+    },
+  },
 ];

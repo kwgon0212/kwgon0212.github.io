@@ -108,4 +108,12 @@ export const skills: Record<string, Skill> = {
     name: "Vercel",
     img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
   },
+  CRXJS: {
+    name: "CRXJS",
+    img: "/assets/stack/crxjs.svg",
+  },
+  "dnd-kit": {
+    name: "dnd-kit",
+    img: "/assets/stack/dnd-kit.svg",
+  },
 };
