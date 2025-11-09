@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { skills, Skill } from "./stack";
 
 export type Member = { name: string; role: string };
@@ -7,7 +8,7 @@ export interface Project {
   id: number;
   name: string;
   logo: string;
-  description: string;
+  description: ReactNode | string;
   period: string;
   award?: string;
   techStack: Skill[];
@@ -435,7 +436,19 @@ export const projects: Project[] = [
     id: 4,
     name: "Snab",
     logo: "/assets/projects/snab/logo.png",
-    description: "브라우저 탭 관리 크롬 익스텐션 (배포 검수 중)",
+    description: (
+      <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
+        브라우저 탭 관리 크롬 익스텐션 (배포 완료) <br />
+        <a
+          href="https://chromewebstore.google.com/detail/snab-tab-management/nahdmjdlcleelikfdcnbfnbakgjmgmbb"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-300 hover:text-blue-500 transition-colors duration-300 font-semibold"
+        >
+          Snab - Tab Management
+        </a>
+      </p>
+    ),
     period: "2025.10.20 - 2025.11.05",
     techStack: [
       skills["React.js"],

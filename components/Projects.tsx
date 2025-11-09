@@ -96,9 +96,14 @@ const Projects = () => {
                           <h4 className="text-lg font-semibold text-black dark:text-white mb-3">
                             프로젝트 소개
                           </h4>
-                          <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-                            {project.description}
-                          </p>
+
+                          {typeof project.description === "string" ? (
+                            <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
+                              {project.description}
+                            </p>
+                          ) : (
+                            project.description
+                          )}
                         </div>
 
                         {/* 기술 스택 */}
